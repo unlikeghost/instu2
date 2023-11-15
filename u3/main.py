@@ -1,6 +1,8 @@
+import os
 import sys
 import eel
 from serial import Serial
+from dotenv import load_dotenv
 from tkinter import messagebox
 from serial.tools import list_ports
 
@@ -66,12 +68,15 @@ def get_data() -> list:
 
 if __name__ == '__main__':
     
-    DEBUG:bool = True
+    load_dotenv()
+    DEBUG:bool = bool(os.getenv('Debug'))
+    MODE:str = os.getenv('Mode')
+    
     if DEBUG:
         import random
     
     ekg = EKG(sampling_rate=100, samples=3, debug=DEBUG)
     
     eel.init('web')
-    eel.start('index.html', mode='default', host='localhost', port=8274,
+    eel.start('index.html', mode=MODE, host='localhost', port=8274,
               close_callback=ekg.exit)
