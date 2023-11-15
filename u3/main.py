@@ -73,5 +73,5 @@ if __name__ == '__main__':
     ekg = EKG(sampling_rate=100, samples=3, debug=DEBUG)
     
     eel.init('web')
-    eel.start('index.html', mode='chrome', host='localhost', port=8274,
+    eel.start('index.html', mode='default', host='localhost', port=8274,
               close_callback=ekg.exit)
